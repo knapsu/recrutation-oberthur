@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="max.retention.days" value="10" />
+
+    <appender name="CONSOLE" class="org.apache.juli.logging.ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level %logger %n%message%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="CATALINA_LOG" class="org.apache.juli.logging.ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.base}/logs/catalina.log</file>
+        <append>true</append>
+        <encoder>
+            <charset>utf-8</charset>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level %logger %n%message%n</pattern>
+        </encoder>
+        <rollingPolicy class="org.apache.juli.logging.ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina.base}/logs/catalina_%d{yyyyMMdd}_%i.log</fileNamePattern>
+            <maxHistory>${max.retention.days}</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <timeBasedFileNamingAndTriggeringPolicy class="org.apache.juli.logging.ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>20MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="org.apache.catalina" level="INFO" additivity="false">
+        <appender-ref ref="CATALINA_LOG" />
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="CATALINA_LOG" />
+    </root>
+
+</configuration>

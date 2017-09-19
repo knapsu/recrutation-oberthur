@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="max.retention.days" value="10" />
+
+    <appender name="ACCESS_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.base}/logs/access.log</file>
+        <append>true</append>
+        <encoder class="ch.qos.logback.access.PatternLayoutEncoder">
+            <charset>utf-8</charset>
+            <pattern>common</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina.base}/logs/access_%d{yyyyMMdd}_%i.log</fileNamePattern>
+            <maxHistory>${max.retention.days}</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>20MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <appender-ref ref="ACCESS_LOG" />
+
+</configuration>
