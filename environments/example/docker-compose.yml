@@ -1,0 +1,18 @@
+version: "3"
+services:
+  webapp:
+    image: knapsu/petclinic:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./webapp/logs/:/opt/tomcat/logs/
+  balancer:
+    image: knapsu/nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/config:/etc/nginx/sites-available/default:ro
+      - ./nginx/logs/:/var/log/nginx/
+    links:
+      - webapp:petclinic
