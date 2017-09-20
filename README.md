@@ -2,8 +2,9 @@
 
 tasks done:
 - Dockerized Jenkins CI with a job that builds Pet Clinic (job configuration not commited to the repo)
-- Deployed Pet Clinic to Apache Tomcat web application server (needed to patch data-access.properties to work)
+- Docker image for Tomcat application server
+- Bundled Pet Clinic with Tomcat as Docker image (needed to patch data-access.properties to work)
+- Docker image for Nginx web server
+- Docker Compose config for sample target environment
 
-tasks to be done:
-- Nginx
-- target environment Docker Compose config
+Additionally I've signed SSL certificates and used them with Nginx.
